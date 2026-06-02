@@ -19,6 +19,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -28,6 +29,7 @@ body {
   background: var(--white);
   font-family: var(--font);
   line-height: 1.45;
+  overflow-x: hidden;
 }
 
 img {
@@ -185,7 +187,9 @@ input {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  flex: 0 0 auto;
+  gap: 12px;
+  min-width: max-content;
 }
 
 .brand:hover {
@@ -193,9 +197,15 @@ input {
 }
 
 .brand-mark {
-  width: 58px;
+  width: 70px;
   order: 2;
   color: var(--primary-navy);
+}
+
+.brand-mark svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .brand-text {
@@ -208,7 +218,7 @@ input {
 }
 
 .brand-text strong {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
 }
 
