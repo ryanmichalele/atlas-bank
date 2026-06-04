@@ -570,11 +570,29 @@
       .page-title { font-size: 26px; }
     }
     @media (max-width: 640px) {
-      .page { padding: 20px 18px 40px; }
+      .page { padding: 20px 16px 40px; }
+      .header { padding: 0 16px; }
+      .logo { margin-right: 12px; }
+      .logo-img { height: 24px; }
+      .header-right { gap: 12px; }
+      .sign-out-btn { font-size: 13px; }
       .top-nav { display: none; }
-      .quick-actions { grid-template-columns: repeat(2, 1fr); }
-      .widget { padding: 20px; }
-      .acct-card { padding: 20px; }
+      .page-title { font-size: 22px; }
+      .quick-actions { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .widget { padding: 18px; min-height: auto; }
+      .acct-card { padding: 18px; min-height: 170px; }
+      .acct-balance { font-size: 24px; }
+      .rewards-card { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .header-right .hdr-icon:nth-child(n+4) { display: none; }
+      .quick-actions { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .qa { font-size: 12px; gap: 6px; height: 44px; }
+      .qa svg { width: 16px; height: 16px; }
+      .account-grid { gap: 12px; }
+      .widget-grid { gap: 12px; }
+      .cash-stats-row { gap: 20px; }
     }
   </style>
 </head>

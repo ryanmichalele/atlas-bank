@@ -1968,6 +1968,46 @@ input {
   .legal-grid strong:nth-child(n+5) {
     border-bottom: 0;
   }
+
+  .utility-links {
+    display: none;
+  }
+
+  .audience-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+
+  .audience-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .story-box {
+    position: static;
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .phone--security {
+    transform: none;
+    margin: 24px auto 0;
+  }
+
+  .phone--app {
+    margin: 0 auto;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+
+  .hero__left {
+    max-width: 480px;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 620px) {
@@ -2082,5 +2122,102 @@ input {
   .cash-ribbon .icon-close {
     right: 10px;
     font-size: 30px;
+  }
+
+  .audience-bar {
+    display: none;
+  }
+
+  .open-account {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .rate {
+    font-size: 42px;
+  }
+
+  .rate span {
+    font-size: 24px;
+  }
+
+  .hero__cards h1 {
+    font-size: 26px;
+  }
+
+  .card-offer h2 {
+    font-size: 16px;
+    min-height: 40px;
+    margin: 14px 0 4px;
+  }
+
+  .card-offer a {
+    font-size: 14px;
+    min-height: 54px;
+  }
+
+  .phone--security,
+  .phone--app {
+    width: 180px;
+  }
+
+  .phone--security {
+    transform: none;
+    margin: 16px auto 0;
+  }
+
+  body {
+    padding-bottom: 76px;
+  }
+
+  .section-heading h2,
+  .security-news h2,
+  .connect h2 {
+    font-size: 26px;
+  }
+
+  .goals {
+    padding: 36px 0 48px;
+  }
+
+  .security-news {
+    padding: 32px 0 0;
+  }
+
+  .connect {
+    padding: 36px 0 40px;
+  }
+
+  .feature-item {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .offer-grid {
+    gap: 16px;
+  }
+
+  .rate {
+    font-size: 36px;
+  }
+
+  .rate span {
+    font-size: 20px;
+  }
+
+  .reward,
+  .fee {
+    font-size: 14px;
+  }
+
+  .brand-logo {
+    width: 200px;
+  }
+
+  .hero__inner {
+    gap: 24px;
+    padding: 16px 0;
   }
 }
