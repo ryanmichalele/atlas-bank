@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bank of America</title>
-  <link rel="icon" href="assets/images/bank-of-america-logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/images/bank-of-america-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/images/bank-of-america-logo.png">
 </head>
 <body>
   <div class="fdic-strip">
@@ -41,7 +40,9 @@
   <header class="site-header">
     <div class="shell header-main">
       <a class="brand" href="#" aria-label="Bank of America home">
-        <img class="brand-logo" src="assets/images/bank-of-america-wordmark.png" alt="Bank of America">
+        <img src="assets/images/bank-of-america-logo.png"
+             alt="Bank of America"
+             class="brand-logo-img">
       </a>
       <form class="search" role="search">
         <label class="sr-only" for="searchInput">Search</label>
@@ -53,9 +54,9 @@
           </svg>
         </button>
       </form>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenuDrawer">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav">
         <span></span><span></span><span></span>
-        <span class="sr-only">Open menu</span>
+        <span class="sr-only">Menu</span>
       </button>
     </div>
     <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
@@ -76,7 +77,7 @@
               </section>
 
               <section class="mega-menu__links" aria-label="Checking products">
-                <article><a href="/deposits/checking/checking-accounts/">BOA Advantage Banking</a><p>Checking accounts to meet you where you are in your journey</p></article>
+                <article><a href="/deposits/checking/checking-accounts/">Bank of America Advantage Banking</a><p>Checking accounts to meet you where you are in your journey</p></article>
                 <article><a href="/deposits/checking/student-banking/">Banking for students and young adults</a><p>Ready to go wherever you go...</p></article>
                 <article><a href="/small-business/checking/">Business Checking</a><p>Convenient checking solutions to fit your unique business needs</p></article>
                 <h3>Learn about select offerings</h3>
@@ -115,11 +116,11 @@
                 <a href="/mobile-banking/">Mobile Banking</a>
               </section>
               <section class="mega-menu__links" aria-label="Savings products">
-                <article><a href="/deposits/savings/savings-accounts/">BOA Advantage Savings</a></article>
+                <article><a href="/deposits/savings/savings-accounts/">Bank of America Advantage Savings</a></article>
                 <article><a href="/deposits/cds/">CDs</a></article>
                 <article><a href="/deposits/iras/">IRAs</a></article>
                 <h3>Learn about select offerings</h3>
-                <article><a href="/rewards/">BOA Rewards</a><p>Enjoy benefits that grow as your balances grow.</p></article>
+                <article><a href="/rewards/">Bank of America Rewards</a><p>Enjoy benefits that grow as your balances grow.</p></article>
                 <article><a href="/signature-services/">Signature Services</a><p>Get help with estate services, account changes and power of attorney.</p></article>
               </section>
               <aside class="mega-menu__aside" aria-label="Savings offers">
@@ -222,7 +223,7 @@
               <section class="mega-menu__column" aria-label="Explore auto loans">
                 <h3>Explore auto loans</h3>
                 <article><a href="/auto-loans/">Auto purchase loans</a><p>Competitive rates on dealer purchase loans</p></article>
-                <article><a href="/auto-loans/prequalification/">Auto loan prequalification</a><p>For customers with a BOA login with no credit score impact</p></article>
+                <article><a href="/auto-loans/prequalification/">Auto loan prequalification</a><p>For customers with a BOI login with no credit score impact</p></article>
                 <article><a href="/auto-loans/electric-vehicle/">Ready for an electric vehicle?</a><p>Resources for driving towards a cleaner tomorrow</p></article>
                 <h3>Manage requests</h3>
                 <a href="/auto-loans/application-status/">Check application status</a>
@@ -254,12 +255,12 @@
 
         <div class="primary-nav__item">
           <button class="primary-nav__trigger" type="button" aria-expanded="false" aria-controls="investingMega">
-            Merrill Investing <span class="nav-chevron" aria-hidden="true"></span>
+            Bank of America Investing <span class="nav-chevron" aria-hidden="true"></span>
           </button>
           <div class="mega-menu mega-menu--investing" id="investingMega">
             <div class="shell mega-menu__inner">
               <section class="mega-menu__intro" aria-label="Investing overview">
-                <div class="investment-brand">Merrill <span>Investing Services</span></div>
+                <div class="investment-brand">Bank of America <span>Investing Services</span></div>
                 <h2>Reinventing what it means to be a confident investor</h2>
                 <a class="mega-cta" href="/investing/">Get started</a>
               </section>
@@ -267,14 +268,14 @@
                 <article><a href="/investing/self-directed/">Build your own portfolio</a><p>Take advantage of flexible, easy-to-use tools with self-directed investing</p></article>
                 <article><a href="/investing/guided/">Get a professionally managed portfolio</a><p>Investment professionals design and manage a portfolio aligned to your goals</p></article>
                 <article><a href="/investing/advisor/">Work with a dedicated advisor</a><p>Get one-on-one guidance and develop a comprehensive strategy</p></article>
-                <article><a href="/rewards/">BOA Rewards</a><p>Your deposits and investing balances get you more with BOA Rewards</p></article>
+                <article><a href="/rewards/">Bank of America Rewards</a><p>Your deposits and investing balances get you more with BOI Rewards</p></article>
                 <article><a href="/investing/compare/">Compare ways to invest</a></article>
                 <h3>Learn about customized solutions</h3>
-                <article><a href="/private-bank/">BOA Private Bank</a><p>Get help managing the complexities of substantial wealth</p></article>
+                <article><a href="/private-bank/">Bank of America Private Bank</a><p>Get help managing the complexities of substantial wealth</p></article>
               </section>
               <aside class="mega-menu__aside" aria-label="Investing support">
                 <div class="mega-info-card">
-                  <h3>Merrill Investing</h3>
+                  <h3>Bank of America Investing</h3>
                   <div class="mega-invest-art" aria-hidden="true"></div>
                   <a href="/investing/retirement/">Start investing for retirement</a>
                 </div>
@@ -321,32 +322,6 @@
         </div>
       </div>
     </nav>
-    <div class="mobile-menu-overlay" data-mobile-menu-close></div>
-    <aside class="mobile-menu-drawer" id="mobileMenuDrawer" aria-labelledby="mobileMenuTitle" aria-hidden="true">
-      <div class="mobile-menu__header">
-        <h2 id="mobileMenuTitle">Menu</h2>
-        <button class="mobile-menu__close" type="button" aria-label="Close menu" data-mobile-menu-close>&times;</button>
-      </div>
-      <nav class="mobile-menu__links" aria-label="Mobile menu">
-        <a href="/auth/enroll/enroll-entry/">Enroll</a>
-        <a href="/secure-mycommunications/public/appointments/">Schedule an appointment</a>
-        <a href="/online-banking/mobile-banking/">Get the app</a>
-        <a href="https://homeloanhelp.bankofamerica.com/en/">Help with home loan payments</a>
-
-        <span class="mobile-menu__divider" aria-hidden="true"></span>
-
-        <a href="/smallbusiness/">Business</a>
-        <a href="/wealth-management/">Wealth Management</a>
-
-        <span class="mobile-menu__divider" aria-hidden="true"></span>
-
-        <a href="/en/security">Privacy &amp; Security</a>
-        <a href="/customer-service/contact-us/about-bank-of-america/">About Us</a>
-        <a href="/es/">En espa&ntilde;ol</a>
-        <a href="/customer-service/contact-us/">Contact Us</a>
-        <a href="/customer-service/">Help</a>
-      </nav>
-    </aside>
   </header>
 
   <main>
@@ -367,10 +342,10 @@
             </form>
             <div class="login-links">
               <a href="#">Forgot user ID/password</a>
-              <span><a href="#">Security &amp; Help</a> <a href="#">Enroll</a></span>
+              <span><a href="#">Security &amp; Help</a> <a href="open-account.html">Enroll</a></span>
             </div>
           </aside>
-          <a class="open-account" href="#">
+          <a class="open-account" href="open-account.html">
             <span aria-hidden="true">$</span>
             Open an account
           </a>
@@ -407,8 +382,8 @@
               <p class="rate">0<span>%</span></p>
               <p class="reward">intro APR offer</p>
               <p class="fee">No annual fee.</p>
-              <img src="images/card-white.png" alt="White BankAmericard with introductory APR offer">
-              <h2>BankAmericard&reg;</h2>
+              <img src="images/card-white.png" alt="White Bank of America card with introductory APR offer">
+              <h2>Bank of America Intro Card&reg;</h2>
               <a href="#">Intro APR offer for <strong>21 billing cycles</strong></a>
             </article>
           </div>
@@ -441,7 +416,7 @@
           <img src="images/coach-stadium.png" alt="Female coach in a stadium">
           <div class="story-box">
             <h2>Change the game</h2>
-            <p>BOA Bank champions everyone who dares to ask: What would you like the power to do?</p>
+            <p>Bank of America Bank champions everyone who dares to ask: What would you like the power to do?</p>
             <a href="#">Learn more</a>
           </div>
         </article>
@@ -469,9 +444,9 @@
           <a href="#">Get the app</a>
         </article>
         <article class="feature-item feature-item--brand">
-          <div class="mini-brand" aria-hidden="true">BOA</div>
+          <div class="mini-brand" aria-hidden="true">BOI</div>
           <h2>Solutions built around you</h2>
-          <p>At BOA, we provide the tools, people and know-how to help you pursue your financial goals.</p>
+          <p>At Bank of America, we provide the tools, people and know-how to help you pursue your financial goals.</p>
           <a href="#">Get started</a>
         </article>
       </div>
@@ -536,10 +511,10 @@
           <h2>Convenient banking with our Mobile app</h2>
           <a class="pill-button pill-button--white" href="#">Explore our app</a>
         </div>
-        <div class="phone phone--app" aria-label="BOA mobile banking app mockup" role="img">
+        <div class="phone phone--app" aria-label="BOI mobile banking app mockup" role="img">
           <div class="phone__speaker"></div>
           <div class="phone__screen">
-            <p class="app-bank">BOA</p>
+            <p class="app-bank">Bank of America</p>
             <p class="app-small">Dashboard</p>
             <div class="balance-card">
               <span>Checking</span>
@@ -580,8 +555,8 @@
           <strong>Are Not Insured by Any Federal Government Agency</strong>
           <strong>Are Not a Condition to Any Banking Service or Activity</strong>
         </div>
-        <p><strong>BOA Bank, Member FDIC. Equal Housing Lender.</strong></p>
-        <p>Banking, credit card, automobile loans, mortgage and home equity products are provided by BOA Bank, N.A. and affiliated banks, Members FDIC and wholly owned subsidiaries of BOA Bancorp. Credit and collateral are subject to approval. Terms and conditions apply. This is not a commitment to lend. Programs, rates, terms and conditions are subject to change without notice.</p>
+        <p><strong>Bank of America Bank, Member FDIC. Equal Housing Lender.</strong></p>
+        <p>Banking, credit card, automobile loans, mortgage and home equity products are provided by BOI Bank, N.A. and affiliated banks, Members FDIC and wholly owned subsidiaries of BOI Bancorp. Credit and collateral are subject to approval. Terms and conditions apply. This is not a commitment to lend. Programs, rates, terms and conditions are subject to change without notice.</p>
       </div>
     </section>
   </main>
@@ -611,8 +586,8 @@
         <a href="#" aria-label="X">x</a>
         <a href="#" aria-label="YouTube">yt</a>
       </div>
-      <p>BOA Bank, N.A. Member FDIC. Equal Housing Lender.</p>
-      <p>&copy; 2025 BOA Bank. All rights reserved.</p>
+      <p>BOI Bank, N.A. Member FDIC. Equal Housing Lender.</p>
+      <p>&copy; 2025 BOI Bank. All rights reserved.</p>
     </div>
   </footer>
 

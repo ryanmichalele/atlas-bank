@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open an Account — Bank of America</title>
+  <link rel="icon" type="image/png" href="assets/images/bank-of-america-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red:       #d0021b;
+      --red-dark:  #b00018;
+      --blue:      #0057d9;
+      --blue-dark: #0046ad;
+      --navy:      #002776;
+      --green:     #1a7a2e;
+      --bg:        #f4f5f7;
+      --card:      #ffffff;
+      --border:    #dedede;
+      --soft:      #eeeeee;
+      --t1:        #111111;
+      --t2:        #444444;
+      --t3:        #777777;
+      --shadow:    0 2px 10px rgba(0,0,0,0.09);
+      --font: "Helvetica Neue", Arial, "Inter", sans-serif;
+      --radius: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--t1);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; }
+    h1,h2,h3,p { margin: 0; }
+    img { display: block; max-width: 100%; }
+
+    /* ── HEADER ── */
+    .header {
+      height: 64px;
+      background: linear-gradient(180deg, var(--red), var(--red-dark));
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .header a {
+      display: block;
+      text-decoration: none;
+      /* screen blend: white pixels stay white, black pixels vanish into red bg */
+      mix-blend-mode: screen;
+    }
+    .h-logo-img {
+      display: block;
+      height: 28px;
+      width: auto;
+      filter: grayscale(1) invert(1);
+    }
+
+    /* ── PAGE SHELL ── */
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* ── STEPPER ── */
+    .stepper {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .stepper::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: calc(100% / 12);
+      right: calc(100% / 12);
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .step-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      cursor: default;
+    }
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--t3);
+      transition: all .25s;
+    }
+    .step-item.done .step-circle {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+    .step-item.active .step-circle {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(208,2,27,.15);
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--t3);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .step-item.active .step-label { color: var(--red); font-weight: 600; }
+    .step-item.done  .step-label  { color: var(--blue); }
+
+    /* ── CARD ── */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 40px;
+    }
+    .card-heading {
+      margin-bottom: 6px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--t1);
+    }
+    .card-sub {
+      margin-bottom: 28px;
+      font-size: 14px;
+      color: var(--t2);
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+      margin-bottom: 18px;
+    }
+    .field-row.full { grid-template-columns: 1fr; }
+    .field-row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--t2);
+    }
+    .field label .req { color: var(--red); margin-left: 2px; }
+    .field input,
+    .field select,
+    .field textarea {
+      height: 44px;
+      padding: 0 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      font: inherit;
+      font-size: 14px;
+      color: var(--t1);
+      background: #fff;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .field textarea {
+      height: 80px;
+      padding: 10px 12px;
+      resize: vertical;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,87,217,.1);
+    }
+    .field input.error,
+    .field select.error {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(208,2,27,.1);
+    }
+    .field .err-msg {
+      font-size: 12px;
+      color: var(--red);
+      display: none;
+    }
+    .field.has-error .err-msg { display: block; }
+
+    .hint {
+      font-size: 12px;
+      color: var(--t3);
+      margin-top: 2px;
+    }
+
+    /* ── ACCOUNT TYPE CARDS ── */
+    .acct-type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .acct-type-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      position: relative;
+    }
+    .acct-type-card:hover { border-color: var(--blue); background: #f6f9ff; }
+    .acct-type-card.selected {
+      border-color: var(--blue);
+      background: #eef4ff;
+    }
+    .acct-type-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .acct-type-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .acct-type-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--t1);
+      margin-bottom: 4px;
+    }
+    .acct-type-desc {
+      font-size: 12px;
+      color: var(--t3);
+      line-height: 1.4;
+    }
+    .check-mark {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .check-mark svg { width: 11px; height: 11px; }
+    .acct-type-card.selected .check-mark { display: flex; }
+
+    /* ── CHECKBOX & RADIO ── */
+    .check-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .check-field input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      flex-shrink: 0;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .check-field label {
+      font-size: 13px;
+      color: var(--t2);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .check-field label a { color: var(--blue); text-decoration: underline; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--soft);
+      margin: 24px 0;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--t3);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      background: #eef4ff;
+      border: 1px solid #b8d0f9;
+      border-radius: 6px;
+      padding: 12px 16px;
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+    .info-box svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── REVIEW ROWS ── */
+    .review-section { margin-bottom: 22px; }
+    .review-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--soft);
+      font-size: 14px;
+    }
+    .review-row:last-child { border-bottom: none; }
+    .review-row .rv-label { color: var(--t3); }
+    .review-row .rv-val   { font-weight: 500; color: var(--t1); text-align: right; max-width: 55%; }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 32px;
+      gap: 12px;
+    }
+    .btn {
+      height: 46px;
+      padding: 0 28px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background .15s, opacity .15s;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      min-width: 160px;
+    }
+    .btn-primary:hover { background: var(--blue-dark); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--blue);
+      border: 1.5px solid var(--blue);
+    }
+    .btn-secondary:hover { background: #f0f5ff; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--t3);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover { background: var(--bg); color: var(--t2); }
+
+    /* ── SUCCESS ── */
+    .success-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #e8f5ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      border: 2px solid #a8d8b5;
+    }
+    .success-icon svg { width: 36px; height: 36px; }
+    .success-title {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .success-sub {
+      font-size: 15px;
+      color: var(--t2);
+      max-width: 460px;
+      margin: 0 auto 8px;
+      line-height: 1.6;
+    }
+    .account-ref {
+      display: inline-block;
+      margin: 18px 0 28px;
+      padding: 14px 28px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--t2);
+    }
+    .account-ref strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--t1);
+      letter-spacing: .04em;
+      margin-top: 4px;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      height: 4px;
+      background: var(--soft);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), #4a9eff);
+      border-radius: 999px;
+      transition: width .4s ease;
+    }
+
+    /* ── PASSWORD STRENGTH ── */
+    .pw-strength { margin-top: 6px; }
+    .pw-bars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .pw-bar {
+      flex: 1;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--soft);
+      transition: background .3s;
+    }
+    .pw-bar.weak   { background: #e53935; }
+    .pw-bar.fair   { background: #fb8c00; }
+    .pw-bar.good   { background: #43a047; }
+    .pw-bar.strong { background: #1b5e20; }
+    .pw-text { font-size: 11px; color: var(--t3); }
+
+    @media (max-width: 640px) {
+      .page { padding: 24px 16px 60px; }
+      .form-card { padding: 24px 20px; }
+      .field-row, .field-row.three { grid-template-columns: 1fr; }
+      .acct-type-grid { grid-template-columns: 1fr; }
+      .stepper { display: none; }
+      .btn-row { flex-direction: column-reverse; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="index.html" aria-label="Bank of America home">
+    <img class="h-logo-img"
+         src="assets/images/bank-of-america-wordmark.png"
+         alt="Bank of America">
+  </a>
+</header>
+
+<!-- PAGE -->
+<main class="page">
+
+  <!-- Progress bar -->
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progressBar" style="width:16.6%"></div>
+  </div>
+
+  <!-- Step indicator -->
+  <div class="stepper" id="stepper">
+    <div class="step-item active" data-step="1">
+      <div class="step-circle">1</div>
+      <div class="step-label">Account<br>Type</div>
+    </div>
+    <div class="step-item" data-step="2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Personal<br>Info</div>
+    </div>
+    <div class="step-item" data-step="3">
+      <div class="step-circle">3</div>
+      <div class="step-label">Address &amp;<br>Contact</div>
+    </div>
+    <div class="step-item" data-step="4">
+      <div class="step-circle">4</div>
+      <div class="step-label">Employment<br>&amp; Income</div>
+    </div>
+    <div class="step-item" data-step="5">
+      <div class="step-circle">5</div>
+      <div class="step-label">Identity<br>Verification</div>
+    </div>
+    <div class="step-item" data-step="6">
+      <div class="step-circle">6</div>
+      <div class="step-label">Review &amp;<br>Submit</div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 1 — Account Type ═══ -->
+  <div id="step1" class="step-panel">
+    <div class="form-card">
+      <h1 class="card-heading">Choose your account type</h1>
+      <p class="card-sub">Select the account that best fits your financial needs.</p>
+
+      <div class="acct-type-grid">
+        <label class="acct-type-card selected" onclick="selectAcct(this,'Advantage Checking')">
+          <input type="radio" name="acctType" value="Advantage Checking" checked>
+          <div class="check-mark">
+            <svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="acct-type-icon" style="background:#fff0f0">💳</div>
+          <div class="acct-type-name">Advantage Checking</div>
+          <div class="acct-type-desc">Everyday checking with no monthly fee when you keep a minimum balance. Debit card included.</div>
+        </label>
+
+        <label class="acct-type-card" onclick="selectAcct(this,'Advantage Savings')">
+          <input type="radio" name="acctType" value="Advantage Savings">
+          <div class="check-mark">
+            <svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="acct-type-icon" style="background:#f0f7ff">🏦</div>
+          <div class="acct-type-name">Advantage Savings</div>
+          <div class="acct-type-desc">Earn competitive interest on your savings. No monthly fee with a linked checking account.</div>
+        </label>
+
+        <label class="acct-type-card" onclick="selectAcct(this,'Money Market Account')">
+          <input type="radio" name="acctType" value="Money Market Account">
+          <div class="check-mark">
+            <svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="acct-type-icon" style="background:#f0fff4">📈</div>
+          <div class="acct-type-name">Money Market Account</div>
+          <div class="acct-type-desc">Higher interest rates with flexible access. Best for larger balances and short-term savings goals.</div>
+        </label>
+
+        <label class="acct-type-card" onclick="selectAcct(this,'Certificate of Deposit (CD)')">
+          <input type="radio" name="acctType" value="Certificate of Deposit (CD)">
+          <div class="check-mark">
+            <svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="acct-type-icon" style="background:#fff8f0">🔒</div>
+          <div class="acct-type-name">Certificate of Deposit (CD)</div>
+          <div class="acct-type-desc">Lock in a fixed rate for a set term (3–60 months). Ideal for guaranteed returns on idle cash.</div>
+        </label>
+      </div>
+
+      <!-- CD term (shown only when CD selected) -->
+      <div id="cdTermRow" style="display:none" class="field-row">
+        <div class="field">
+          <label for="cdTerm">CD Term <span class="req">*</span></label>
+          <select id="cdTerm" name="cdTerm">
+            <option value="">Select term</option>
+            <option>3 months</option>
+            <option>6 months</option>
+            <option>9 months</option>
+            <option>12 months</option>
+            <option>18 months</option>
+            <option>24 months</option>
+            <option>36 months</option>
+            <option>60 months</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cdAmount">Initial Deposit Amount <span class="req">*</span></label>
+          <input type="number" id="cdAmount" name="cdAmount" min="1000" placeholder="$1,000 minimum">
+        </div>
+      </div>
+
+      <div class="info-box">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="14"/><circle cx="10" cy="6.5" r=".5" fill="currentColor"/>
+        </svg>
+        <span>All accounts are <strong>FDIC insured</strong> up to $250,000 per depositor. Your information is encrypted and secure.</span>
+      </div>
+
+      <div class="btn-row">
+        <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+        <button class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 2 — Personal Info ═══ -->
+  <div id="step2" class="step-panel" style="display:none">
+    <div class="form-card">
+      <h1 class="card-heading">Personal information</h1>
+      <p class="card-sub">We need this to verify your identity. All fields marked <span style="color:var(--red)">*</span> are required.</p>
+
+      <div class="section-title">Legal Name</div>
+      <div class="field-row">
+        <div class="field" id="f-firstName">
+          <label for="firstName">First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" name="firstName" placeholder="e.g. John" autocomplete="given-name">
+          <span class="err-msg">Please enter your first name.</span>
+        </div>
+        <div class="field">
+          <label for="middleName">Middle Name</label>
+          <input type="text" id="middleName" name="middleName" placeholder="Optional" autocomplete="additional-name">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" id="f-lastName">
+          <label for="lastName">Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" name="lastName" placeholder="e.g. Smith" autocomplete="family-name">
+          <span class="err-msg">Please enter your last name.</span>
+        </div>
+        <div class="field">
+          <label for="suffix">Suffix</label>
+          <select id="suffix" name="suffix">
+            <option value="">None</option>
+            <option>Jr.</option><option>Sr.</option><option>II</option>
+            <option>III</option><option>IV</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">Date of Birth &amp; Identity</div>
+
+      <div class="field-row three">
+        <div class="field" id="f-dobMonth">
+          <label for="dobMonth">Birth Month <span class="req">*</span></label>
+          <select id="dobMonth" name="dobMonth">
+            <option value="">Month</option>
+            <option value="01">January</option><option value="02">February</option>
+            <option value="03">March</option><option value="04">April</option>
+            <option value="05">May</option><option value="06">June</option>
+            <option value="07">July</option><option value="08">August</option>
+            <option value="09">September</option><option value="10">October</option>
+            <option value="11">November</option><option value="12">December</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-dobDay">
+          <label for="dobDay">Birth Day <span class="req">*</span></label>
+          <input type="number" id="dobDay" name="dobDay" min="1" max="31" placeholder="DD">
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-dobYear">
+          <label for="dobYear">Birth Year <span class="req">*</span></label>
+          <input type="number" id="dobYear" name="dobYear" min="1900" max="2006" placeholder="YYYY">
+          <span class="err-msg">Must be 18+.</span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" id="f-ssn">
+          <label for="ssn">Social Security Number <span class="req">*</span></label>
+          <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" maxlength="11" autocomplete="off">
+          <span class="hint">Your SSN is encrypted and used for identity verification only.</span>
+          <span class="err-msg">Please enter a valid SSN (XXX-XX-XXXX).</span>
+        </div>
+        <div class="field" id="f-citizenship">
+          <label for="citizenship">Citizenship Status <span class="req">*</span></label>
+          <select id="citizenship" name="citizenship">
+            <option value="">Select status</option>
+            <option>U.S. Citizen</option>
+            <option>U.S. Permanent Resident</option>
+            <option>Non-Resident Alien</option>
+            <option>Other</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">Security Question</div>
+      <div class="field-row">
+        <div class="field" id="f-secQ">
+          <label for="secQ">Security Question <span class="req">*</span></label>
+          <select id="secQ" name="secQ">
+            <option value="">Choose a question</option>
+            <option>What is your mother's maiden name?</option>
+            <option>What was the name of your first pet?</option>
+            <option>What city were you born in?</option>
+            <option>What was the make of your first car?</option>
+            <option>What is the name of your eldest sibling?</option>
+            <option>What was the name of your elementary school?</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-secA">
+          <label for="secA">Answer <span class="req">*</span></label>
+          <input type="text" id="secA" name="secA" placeholder="Your answer" autocomplete="off">
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 3 — Address & Contact ═══ -->
+  <div id="step3" class="step-panel" style="display:none">
+    <div class="form-card">
+      <h1 class="card-heading">Address &amp; contact details</h1>
+      <p class="card-sub">Please provide your current residential address and contact information.</p>
+
+      <div class="section-title">Home Address</div>
+      <div class="field-row full">
+        <div class="field" id="f-addr1">
+          <label for="addr1">Street Address <span class="req">*</span></label>
+          <input type="text" id="addr1" name="addr1" placeholder="e.g. 123 Main Street" autocomplete="street-address">
+          <span class="err-msg">Please enter your street address.</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="addr2">Apt / Suite / Unit</label>
+          <input type="text" id="addr2" name="addr2" placeholder="Optional" autocomplete="address-line2">
+        </div>
+        <div class="field" id="f-city">
+          <label for="city">City <span class="req">*</span></label>
+          <input type="text" id="city" name="city" placeholder="e.g. Charlotte" autocomplete="address-level2">
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+      <div class="field-row three">
+        <div class="field" id="f-state">
+          <label for="state">State <span class="req">*</span></label>
+          <select id="state" name="state" autocomplete="address-level1">
+            <option value="">Select state</option>
+            <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+            <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+            <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+            <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+            <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+            <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+            <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+            <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+            <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+            <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+            <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+            <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+            <option>WI</option><option>WY</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-zip">
+          <label for="zip">ZIP Code <span class="req">*</span></label>
+          <input type="text" id="zip" name="zip" maxlength="5" placeholder="e.g. 28201" autocomplete="postal-code">
+          <span class="err-msg">Enter a 5-digit ZIP.</span>
+        </div>
+        <div class="field" id="f-residency">
+          <label for="residency">Years at Address <span class="req">*</span></label>
+          <select id="residency" name="residency">
+            <option value="">Select</option>
+            <option>Less than 1 year</option>
+            <option>1–2 years</option>
+            <option>3–5 years</option>
+            <option>6–10 years</option>
+            <option>More than 10 years</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">Contact Information</div>
+
+      <div class="field-row">
+        <div class="field" id="f-email">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="e.g. john@email.com" autocomplete="email">
+          <span class="err-msg">Please enter a valid email address.</span>
+        </div>
+        <div class="field" id="f-emailConfirm">
+          <label for="emailConfirm">Confirm Email <span class="req">*</span></label>
+          <input type="email" id="emailConfirm" name="emailConfirm" placeholder="Re-enter email">
+          <span class="err-msg">Emails do not match.</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" id="f-phone">
+          <label for="phone">Mobile Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" maxlength="14" autocomplete="tel">
+          <span class="err-msg">Enter a valid 10-digit phone number.</span>
+        </div>
+        <div class="field">
+          <label for="phoneAlt">Alternate Phone</label>
+          <input type="tel" id="phoneAlt" name="phoneAlt" placeholder="Optional" maxlength="14">
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 4 — Employment & Income ═══ -->
+  <div id="step4" class="step-panel" style="display:none">
+    <div class="form-card">
+      <h1 class="card-heading">Employment &amp; income</h1>
+      <p class="card-sub">This information helps us meet federal regulatory requirements.</p>
+
+      <div class="section-title">Employment Status</div>
+      <div class="field-row">
+        <div class="field" id="f-empStatus">
+          <label for="empStatus">Employment Status <span class="req">*</span></label>
+          <select id="empStatus" name="empStatus" onchange="toggleEmpFields()">
+            <option value="">Select status</option>
+            <option>Employed Full-Time</option>
+            <option>Employed Part-Time</option>
+            <option>Self-Employed</option>
+            <option>Retired</option>
+            <option>Student</option>
+            <option>Homemaker</option>
+            <option>Unemployed</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-occupation">
+          <label for="occupation">Occupation / Job Title <span class="req">*</span></label>
+          <input type="text" id="occupation" name="occupation" placeholder="e.g. Software Engineer">
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+
+      <div id="employerFields">
+        <div class="field-row">
+          <div class="field">
+            <label for="employer">Employer Name</label>
+            <input type="text" id="employer" name="employer" placeholder="e.g. Acme Corp">
+          </div>
+          <div class="field">
+            <label for="empYears">Years with Employer</label>
+            <select id="empYears" name="empYears">
+              <option value="">Select</option>
+              <option>Less than 1 year</option>
+              <option>1–3 years</option>
+              <option>4–7 years</option>
+              <option>8–15 years</option>
+              <option>More than 15 years</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">Income &amp; Funding</div>
+
+      <div class="field-row">
+        <div class="field" id="f-annualIncome">
+          <label for="annualIncome">Annual Gross Income <span class="req">*</span></label>
+          <select id="annualIncome" name="annualIncome">
+            <option value="">Select range</option>
+            <option>Under $25,000</option>
+            <option>$25,000 – $49,999</option>
+            <option>$50,000 – $74,999</option>
+            <option>$75,000 – $99,999</option>
+            <option>$100,000 – $149,999</option>
+            <option>$150,000 – $249,999</option>
+            <option>$250,000 or more</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-sourceOfFunds">
+          <label for="sourceOfFunds">Primary Source of Funds <span class="req">*</span></label>
+          <select id="sourceOfFunds" name="sourceOfFunds">
+            <option value="">Select source</option>
+            <option>Employment / Salary</option>
+            <option>Business Income</option>
+            <option>Investments</option>
+            <option>Retirement / Pension</option>
+            <option>Inheritance / Gift</option>
+            <option>Government Benefits</option>
+            <option>Other</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" id="f-initialDeposit">
+          <label for="initialDeposit">Initial Deposit Amount <span class="req">*</span></label>
+          <input type="number" id="initialDeposit" name="initialDeposit" min="25" placeholder="Minimum $25">
+          <span class="hint">Minimum opening deposit is $25.</span>
+          <span class="err-msg">Minimum deposit is $25.</span>
+        </div>
+        <div class="field">
+          <label for="depositMethod">Deposit Method <span class="req">*</span></label>
+          <select id="depositMethod" name="depositMethod">
+            <option value="">Select method</option>
+            <option>Transfer from another bank</option>
+            <option>Check or money order</option>
+            <option>Cash at branch</option>
+            <option>Direct deposit</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">Regulatory Disclosures</div>
+      <div class="check-field">
+        <input type="checkbox" id="politicallyExposed" name="politicallyExposed">
+        <label for="politicallyExposed">I am or am related to a politically exposed person (PEP) — a senior government official or their family member.</label>
+      </div>
+      <div class="check-field">
+        <input type="checkbox" id="foreignAcct" name="foreignAcct">
+        <label for="foreignAcct">I have or control a foreign bank account or financial interest in a foreign entity.</label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(4)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 5 — Identity Verification ═══ -->
+  <div id="step5" class="step-panel" style="display:none">
+    <div class="form-card">
+      <h1 class="card-heading">Identity verification</h1>
+      <p class="card-sub">We are required by law to verify your identity. Please provide a valid government-issued ID.</p>
+
+      <div class="section-title">Government-Issued ID</div>
+      <div class="field-row">
+        <div class="field" id="f-idType">
+          <label for="idType">ID Type <span class="req">*</span></label>
+          <select id="idType" name="idType" onchange="toggleIdFields()">
+            <option value="">Select ID type</option>
+            <option>Driver's License</option>
+            <option>State-Issued ID Card</option>
+            <option>U.S. Passport</option>
+            <option>U.S. Passport Card</option>
+            <option>Military ID</option>
+            <option>Permanent Resident Card (Green Card)</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-idNumber">
+          <label for="idNumber">ID Number <span class="req">*</span></label>
+          <input type="text" id="idNumber" name="idNumber" placeholder="Enter ID number" autocomplete="off">
+          <span class="err-msg">Required.</span>
+        </div>
+      </div>
+
+      <div class="field-row" id="idStateRow">
+        <div class="field" id="f-idState">
+          <label for="idState">Issuing State <span class="req">*</span></label>
+          <select id="idState" name="idState">
+            <option value="">Select state</option>
+            <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+            <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+            <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+            <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+            <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+            <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+            <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+            <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+            <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+            <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+            <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+            <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+            <option>WI</option><option>WY</option>
+          </select>
+          <span class="err-msg">Required.</span>
+        </div>
+        <div class="field" id="f-idExpiry">
+          <label for="idExpiry">Expiration Date <span class="req">*</span></label>
+          <input type="text" id="idExpiry" name="idExpiry" placeholder="MM/YYYY" maxlength="7">
+          <span class="err-msg">Enter a future date (MM/YYYY).</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">Online Banking Access</div>
+      <div class="field-row">
+        <div class="field" id="f-username">
+          <label for="username">Create Username <span class="req">*</span></label>
+          <input type="text" id="username" name="username" placeholder="6–20 characters, no spaces" autocomplete="username" maxlength="20">
+          <span class="hint">Letters, numbers, underscores only.</span>
+          <span class="err-msg">Username must be 6–20 characters.</span>
+        </div>
+        <div class="field" id="f-newPassword">
+          <label for="newPassword">Create Password <span class="req">*</span></label>
+          <input type="password" id="newPassword" name="newPassword" placeholder="Min 8 characters" autocomplete="new-password" oninput="checkPwStrength(this.value)">
+          <div class="pw-strength" id="pwStrength" style="display:none">
+            <div class="pw-bars">
+              <div class="pw-bar" id="pb1"></div>
+              <div class="pw-bar" id="pb2"></div>
+              <div class="pw-bar" id="pb3"></div>
+              <div class="pw-bar" id="pb4"></div>
+            </div>
+            <div class="pw-text" id="pwText"></div>
+          </div>
+          <span class="err-msg">Password must be at least 8 characters.</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" id="f-confirmPassword">
+          <label for="confirmPassword">Confirm Password <span class="req">*</span></label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" autocomplete="new-password">
+          <span class="err-msg">Passwords do not match.</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="prevStep(5)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(5)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 6 — Review & Submit ═══ -->
+  <div id="step6" class="step-panel" style="display:none">
+    <div class="form-card">
+      <h1 class="card-heading">Review your application</h1>
+      <p class="card-sub">Please review all details carefully before submitting. You can go back to edit any section.</p>
+
+      <!-- Review summary populated by JS -->
+      <div id="reviewContent"></div>
+
+      <hr class="divider">
+      <div class="section-title">Agreements &amp; Disclosures</div>
+
+      <div class="check-field" id="f-agreeTerms-wrap">
+        <input type="checkbox" id="agreeTerms" name="agreeTerms">
+        <label for="agreeTerms">I have read and agree to the <a href="#">Deposit Account Agreement</a>, <a href="#">Privacy Policy</a>, and <a href="#">Electronic Communications Consent</a>. <span class="req">*</span></label>
+      </div>
+      <div class="check-field">
+        <input type="checkbox" id="agreePatriot" name="agreePatriot">
+        <label for="agreePatriot">I understand that under the USA PATRIOT Act, Bank of America is required to obtain, verify, and record information that identifies each person opening an account. <span class="req">*</span></label>
+      </div>
+      <div class="check-field">
+        <input type="checkbox" id="agreeMarketing" name="agreeMarketing">
+        <label for="agreeMarketing">I consent to receiving account offers and financial tips by email (optional).</label>
+      </div>
+
+      <div id="agreeErr" style="display:none;color:var(--red);font-size:13px;margin-top:-8px;margin-bottom:12px;">
+        Please accept the required agreements to continue.
+      </div>
+
+      <div class="info-box" style="margin-top:16px">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M10 2L3 5v6c0 4 3.3 7.7 7 9 3.7-1.3 7-5 7-9V5L10 2z"/>
+        </svg>
+        <span>Your application is protected by 256-bit SSL encryption. Bank of America will <strong>never</strong> ask for your full SSN by phone or email.</span>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" onclick="prevStep(6)">← Back</button>
+        <button class="btn btn-primary" onclick="submitApp()" style="background:var(--green);min-width:200px">
+          ✓ Submit Application
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SUCCESS ═══ -->
+  <div id="stepSuccess" style="display:none">
+    <div class="success-card">
+      <div class="success-icon">
+        <svg viewBox="0 0 36 36" fill="none" stroke="#1a7a2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="18" r="16"/>
+          <polyline points="10,18 15,23 26,12"/>
+        </svg>
+      </div>
+      <h1 class="success-title">Application Submitted!</h1>
+      <p class="success-sub">
+        Congratulations! Your account application has been received and is under review.
+        You will receive a confirmation email within 24–48 hours.
+      </p>
+      <div class="account-ref">
+        Application Reference Number
+        <strong id="refNumber"></strong>
+      </div>
+      <p style="font-size:13px;color:var(--t3);margin-bottom:28px">
+        Please save this reference number for your records.
+        A Bank of America representative may contact you if additional information is needed.
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="index.html" class="btn btn-secondary" style="display:inline-flex;align-items:center">
+          Back to Home
+        </a>
+        <a href="dashboard.html" class="btn btn-primary" style="display:inline-flex;align-items:center">
+          Go to Dashboard →
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+(function () {
+  var TOTAL = 6;
+  var formData = {};
+
+  /* ── Account type selection ── */
+  window.selectAcct = function (card, type) {
+    document.querySelectorAll('.acct-type-card').forEach(function (c) { c.classList.remove('selected'); });
+    card.classList.add('selected');
+    formData.acctType = type;
+    document.getElementById('cdTermRow').style.display =
+      type === 'Certificate of Deposit (CD)' ? 'grid' : 'none';
+  };
+
+  /* ── Toggle employer fields ── */
+  window.toggleEmpFields = function () {
+    var status = document.getElementById('empStatus').value;
+    var show = ['Employed Full-Time','Employed Part-Time','Self-Employed'].includes(status);
+    document.getElementById('employerFields').style.display = show ? 'block' : 'none';
+    var occ = document.getElementById('f-occupation');
+    occ.querySelector('label').innerHTML = show
+      ? 'Occupation / Job Title <span class="req">*</span>'
+      : 'Occupation / Job Title <span class="req">*</span>';
+  };
+
+  /* ── Toggle ID state row ── */
+  window.toggleIdFields = function () {
+    var type = document.getElementById('idType').value;
+    var hideState = ['U.S. Passport','U.S. Passport Card'].includes(type);
+    document.getElementById('idStateRow').style.display = hideState ? 'none' : 'grid';
+  };
+
+  /* ── Password strength ── */
+  window.checkPwStrength = function (pw) {
+    var el = document.getElementById('pwStrength');
+    if (!pw) { el.style.display = 'none'; return; }
+    el.style.display = 'block';
+    var score = 0;
+    if (pw.length >= 8)  score++;
+    if (pw.length >= 12) score++;
+    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    score = Math.min(score, 4);
+    var levels = ['','weak','fair','good','strong'];
+    var labels = ['','Weak','Fair','Good','Strong'];
+    var colors = ['','#e53935','#fb8c00','#43a047','#1b5e20'];
+    [1,2,3,4].forEach(function (i) {
+      var bar = document.getElementById('pb' + i);
+      bar.className = 'pw-bar' + (i <= score ? ' ' + levels[score] : '');
+    });
+    var txt = document.getElementById('pwText');
+    txt.textContent = labels[score] ? 'Password strength: ' + labels[score] : '';
+    txt.style.color = colors[score];
+  };
+
+  /* ── SSN auto-format ── */
+  document.getElementById('ssn').addEventListener('input', function () {
+    var v = this.value.replace(/\D/g,'');
+    if (v.length > 3 && v.length <= 5) v = v.slice(0,3) + '-' + v.slice(3);
+    else if (v.length > 5) v = v.slice(0,3) + '-' + v.slice(3,5) + '-' + v.slice(5,9);
+    this.value = v;
+  });
+
+  /* ── Phone auto-format ── */
+  ['phone','phoneAlt'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', function () {
+      var v = this.value.replace(/\D/g,'');
+      if (v.length > 6) v = '(' + v.slice(0,3) + ') ' + v.slice(3,6) + '-' + v.slice(6,10);
+      else if (v.length > 3) v = '(' + v.slice(0,3) + ') ' + v.slice(3);
+      else if (v.length > 0) v = '(' + v;
+      this.value = v;
+    });
+  });
+
+  /* ── Validation helpers ── */
+  function markErr(fieldId, show) {
+    var el = document.getElementById(fieldId);
+    if (!el) return;
+    el.classList.toggle('has-error', show);
+    var inp = el.querySelector('input,select,textarea');
+    if (inp) inp.classList.toggle('error', show);
+  }
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function clearErrors(ids) {
+    ids.forEach(function (id) { markErr(id, false); });
+  }
+
+  /* ── Step validation ── */
+  var validators = {
+    1: function () { return true; },
+    2: function () {
+      var ok = true;
+      clearErrors(['f-firstName','f-lastName','f-dobMonth','f-dobDay','f-dobYear','f-ssn','f-citizenship','f-secQ','f-secA']);
+      if (!val('firstName'))  { markErr('f-firstName', true); ok = false; }
+      if (!val('lastName'))   { markErr('f-lastName', true); ok = false; }
+      if (!val('dobMonth'))   { markErr('f-dobMonth', true); ok = false; }
+      if (!val('dobDay') || +val('dobDay') < 1 || +val('dobDay') > 31) { markErr('f-dobDay', true); ok = false; }
+      var year = +val('dobYear');
+      if (!year || year > 2006 || year < 1900) { markErr('f-dobYear', true); ok = false; }
+      if (!/^\d{3}-\d{2}-\d{4}$/.test(val('ssn'))) { markErr('f-ssn', true); ok = false; }
+      if (!val('citizenship')) { markErr('f-citizenship', true); ok = false; }
+      if (!val('secQ'))        { markErr('f-secQ', true); ok = false; }
+      if (!val('secA'))        { markErr('f-secA', true); ok = false; }
+      return ok;
+    },
+    3: function () {
+      var ok = true;
+      clearErrors(['f-addr1','f-city','f-state','f-zip','f-residency','f-email','f-emailConfirm','f-phone']);
+      if (!val('addr1'))    { markErr('f-addr1', true); ok = false; }
+      if (!val('city'))     { markErr('f-city', true); ok = false; }
+      if (!val('state'))    { markErr('f-state', true); ok = false; }
+      if (!/^\d{5}$/.test(val('zip'))) { markErr('f-zip', true); ok = false; }
+      if (!val('residency')){ markErr('f-residency', true); ok = false; }
+      if (!val('email') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email'))) { markErr('f-email', true); ok = false; }
+      if (val('email') !== val('emailConfirm')) { markErr('f-emailConfirm', true); ok = false; }
+      var rawPhone = val('phone').replace(/\D/g,'');
+      if (rawPhone.length !== 10) { markErr('f-phone', true); ok = false; }
+      return ok;
+    },
+    4: function () {
+      var ok = true;
+      clearErrors(['f-empStatus','f-occupation','f-annualIncome','f-sourceOfFunds','f-initialDeposit']);
+      if (!val('empStatus'))     { markErr('f-empStatus', true); ok = false; }
+      if (!val('occupation'))    { markErr('f-occupation', true); ok = false; }
+      if (!val('annualIncome'))  { markErr('f-annualIncome', true); ok = false; }
+      if (!val('sourceOfFunds')) { markErr('f-sourceOfFunds', true); ok = false; }
+      if (!val('initialDeposit') || +val('initialDeposit') < 25) { markErr('f-initialDeposit', true); ok = false; }
+      return ok;
+    },
+    5: function () {
+      var ok = true;
+      clearErrors(['f-idType','f-idNumber','f-idState','f-idExpiry','f-username','f-newPassword','f-confirmPassword']);
+      if (!val('idType'))    { markErr('f-idType', true); ok = false; }
+      if (!val('idNumber'))  { markErr('f-idNumber', true); ok = false; }
+      var type = val('idType');
+      var needState = !['U.S. Passport','U.S. Passport Card'].includes(type);
+      if (needState && !val('idState')) { markErr('f-idState', true); ok = false; }
+      if (!/^\d{2}\/\d{4}$/.test(val('idExpiry'))) { markErr('f-idExpiry', true); ok = false; }
+      var u = val('username');
+      if (!u || u.length < 6 || u.length > 20 || !/^[A-Za-z0-9_]+$/.test(u)) { markErr('f-username', true); ok = false; }
+      if (val('newPassword').length < 8) { markErr('f-newPassword', true); ok = false; }
+      if (val('newPassword') !== val('confirmPassword')) { markErr('f-confirmPassword', true); ok = false; }
+      return ok;
+    }
+  };
+
+  /* ── Collect review data ── */
+  function getReview() {
+    return [
+      { title: 'Account Details', rows: [
+        { label: 'Account Type', v: val('acctType') || formData.acctType || document.querySelector('input[name="acctType"]:checked')?.value || 'Advantage Checking' },
+        { label: 'Initial Deposit', v: val('initialDeposit') ? '$' + parseFloat(val('initialDeposit')).toLocaleString() : '—' },
+        { label: 'Deposit Method', v: val('depositMethod') || '—' }
+      ]},
+      { title: 'Personal Information', rows: [
+        { label: 'Full Name', v: [val('firstName'), val('middleName'), val('lastName'), val('suffix')].filter(Boolean).join(' ') || '—' },
+        { label: 'Date of Birth', v: val('dobMonth') && val('dobDay') && val('dobYear') ? val('dobMonth') + '/' + val('dobDay') + '/' + val('dobYear') : '—' },
+        { label: 'SSN', v: val('ssn') ? '•••-••-' + val('ssn').slice(-4) : '—' },
+        { label: 'Citizenship', v: val('citizenship') || '—' }
+      ]},
+      { title: 'Address & Contact', rows: [
+        { label: 'Address', v: [val('addr1'), val('addr2')].filter(Boolean).join(', ') || '—' },
+        { label: 'City, State ZIP', v: [val('city'), val('state'), val('zip')].filter(Boolean).join(', ') || '—' },
+        { label: 'Email', v: val('email') || '—' },
+        { label: 'Phone', v: val('phone') || '—' }
+      ]},
+      { title: 'Employment & Income', rows: [
+        { label: 'Employment Status', v: val('empStatus') || '—' },
+        { label: 'Occupation', v: val('occupation') || '—' },
+        { label: 'Employer', v: val('employer') || '—' },
+        { label: 'Annual Income', v: val('annualIncome') || '—' },
+        { label: 'Source of Funds', v: val('sourceOfFunds') || '—' }
+      ]},
+      { title: 'Identity', rows: [
+        { label: 'ID Type', v: val('idType') || '—' },
+        { label: 'ID Number', v: val('idNumber') ? '•••••' + val('idNumber').slice(-4) : '—' },
+        { label: 'ID Expiry', v: val('idExpiry') || '—' },
+        { label: 'Username', v: val('username') || '—' }
+      ]}
+    ];
+  }
+
+  function buildReview() {
+    var sections = getReview();
+    var html = '';
+    sections.forEach(function (s) {
+      html += '<div class="review-section">';
+      html += '<div class="section-title">' + s.title + '</div>';
+      s.rows.forEach(function (r) {
+        html += '<div class="review-row"><span class="rv-label">' + r.label + '</span><span class="rv-val">' + r.v + '</span></div>';
+      });
+      html += '</div>';
+    });
+    document.getElementById('reviewContent').innerHTML = html;
+  }
+
+  /* ── Navigation ── */
+  window.nextStep = function (current) {
+    if (validators[current] && !validators[current]()) {
+      document.querySelector('#step' + current + ' .form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    var next = current + 1;
+    if (next === 6) buildReview();
+    showStep(current, next);
+  };
+
+  window.prevStep = function (current) {
+    showStep(current, current - 1);
+  };
+
+  function showStep(from, to) {
+    document.getElementById('step' + from).style.display = 'none';
+    document.getElementById('step' + to).style.display = 'block';
+    updateStepper(to);
+    updateProgress(to);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateStepper(active) {
+    document.querySelectorAll('.step-item').forEach(function (item) {
+      var n = +item.dataset.step;
+      item.classList.remove('active','done');
+      if (n === active) item.classList.add('active');
+      else if (n < active) item.classList.add('done');
+    });
+    // Replace number with check for done steps
+    document.querySelectorAll('.step-item.done .step-circle').forEach(function (c) {
+      if (!c.querySelector('svg')) {
+        c.innerHTML = '<svg viewBox="0 0 12 10" width="14" height="14" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+    });
+  }
+
+  function updateProgress(step) {
+    var pct = (step / TOTAL) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+  }
+
+  /* ── Submit ── */
+  window.submitApp = function () {
+    var agree1 = document.getElementById('agreeTerms').checked;
+    var agree2 = document.getElementById('agreePatriot').checked;
+    document.getElementById('agreeErr').style.display = (!agree1 || !agree2) ? 'block' : 'none';
+    if (!agree1 || !agree2) return;
+
+    // Generate reference number
+    var ref = 'BOA-' + Math.floor(Math.random() * 9000000 + 1000000);
+    document.getElementById('refNumber').textContent = ref;
+
+    document.getElementById('step6').style.display = 'none';
+    document.getElementById('stepper').style.display = 'none';
+    document.querySelector('.progress-bar-wrap').style.display = 'none';
+    document.getElementById('stepSuccess').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Init
+  formData.acctType = 'Advantage Checking';
+  document.getElementById('employerFields').style.display = 'block';
+}());
+</script>
+</body>
+</html>

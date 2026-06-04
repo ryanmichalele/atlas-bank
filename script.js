@@ -77,7 +77,12 @@
   if (loginForm) {
     loginForm.addEventListener('submit', function (event) {
       event.preventDefault();
-      alert('Online banking sign-in is currently unavailable.');
+      var userId = document.getElementById('userId');
+      if (userId && userId.value.trim() === '') {
+        userId.focus();
+        return;
+      }
+      window.location.href = 'dashboard.html';
     });
   }
 }());
